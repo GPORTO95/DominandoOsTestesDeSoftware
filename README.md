@@ -1,13 +1,15 @@
 ## :computer: Projeto - Tests
-Projeto com vários exemplos de testes
+Vários exemplos de testes
 
-## :bulb: Tipos de Testes
-- Teste de Unidade
-- TDD Test Driven Development
-- Testes de Integração
-- BDD
-- Testes Automatizados
-- Testes de Carga
+## :bulb: Tipos
+- TESTE DE UNIDADE
+- TDD - TEST DRIVEN DEVELOPMENT
+- TESTE DE INTEGRAÇÃO
+- BDD - BEHAVIOR DRIVEN DEVELOPMENT
+- TESTE AUTOMATIZADO
+- TESTE DE CARGA
 
-## :pushpin: Ferramentas
+## :hammer_and_wrench: Ferramentas
 - XUnit
+- MOQ
+- SELENIUM
