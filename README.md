@@ -10,7 +10,7 @@ Vários exemplos de testes
 - TESTE DE CARGA
 
 ## :hammer_and_wrench: Ferramentas
-- XUnit
-- MOQ
-- SELENIUM
-- APACHE JMETER
+- [XUNIT](https://xunit.net/)
+- [MOQ](https://github.com/Moq/moq4/wiki/Quickstart)
+- [SELENIUM](https://www.selenium.dev/)
+- [APACHE JMETER](https://jmeter.apache.org/)
