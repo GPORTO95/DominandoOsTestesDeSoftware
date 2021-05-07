@@ -13,3 +13,4 @@ Vários exemplos de testes
 - XUnit
 - MOQ
 - SELENIUM
+- APACHE JMETER
