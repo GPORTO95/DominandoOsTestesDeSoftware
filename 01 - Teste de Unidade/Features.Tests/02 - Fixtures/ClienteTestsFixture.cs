@@ -24,7 +24,7 @@ namespace Features.Tests
             return cliente;
         }
 
-        public Cliente GerarClienteInValido()
+        public Cliente GerarClienteInvalido()
         {
             var cliente = new Cliente(
                 Guid.NewGuid(),

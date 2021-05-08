@@ -55,9 +55,6 @@ namespace Features.Clientes
             _mediator.Publish(new ClienteEmailNotification("admin@me.com", cliente.Email, "Adeus", "Tenha uma boa jornada!"));
         }
 
-        public void Dispose()
-        {
-            _clienteRepository.Dispose();
-        }
+        public void Dispose() => _clienteRepository.Dispose();
     }
 }

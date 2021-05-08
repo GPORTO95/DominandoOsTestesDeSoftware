@@ -11,6 +11,6 @@ Vários exemplos de testes
 
 ## :hammer_and_wrench: Ferramentas
 - [XUNIT](https://xunit.net/)
+- [BOGUS](https://github.com/bchavez/Bogus)
 - [MOQ](https://github.com/Moq/moq4/wiki/Quickstart)
 - [SELENIUM](https://www.selenium.dev/)
-- [APACHE JMETER](https://jmeter.apache.org/)
