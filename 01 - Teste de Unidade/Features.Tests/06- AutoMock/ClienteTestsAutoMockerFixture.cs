@@ -1,20 +1,24 @@
 ﻿using Bogus;
 using Bogus.DataSets;
 using Features.Clientes;
+using Moq.AutoMock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Features.Tests
 {
-    [CollectionDefinition(nameof(ClienteBogusCollection))]
-    public class ClienteBogusCollection : ICollectionFixture<ClienteTestsBogusFixture>
-    { }
-    public class ClienteTestsBogusFixture : IDisposable
+    [CollectionDefinition(nameof(ClienteAutoMockerCollection))]
+    public class ClienteAutoMockerCollection : ICollectionFixture<ClienteTestsAutoMockerFixture>
     {
+    }
+
+    public class ClienteTestsAutoMockerFixture : IDisposable
+    {
+        public ClienteService ClienteService;
+        public AutoMocker Mocker;
+
         public Cliente GerarClienteValido()
         {
             return GerarClientes(1, true).FirstOrDefault();
@@ -29,14 +33,10 @@ namespace Features.Tests
 
             return clientes;
         }
+
         public IEnumerable<Cliente> GerarClientes(int quantidade, bool ativo)
         {
-            //Genero aleatorio
             var genero = new Faker().PickRandom<Name.Gender>();
-
-            //var email = new Faker().Internet.Email("gabriel", "porto");
-            //var clienteFaker = new Faker<Cliente>();
-            //clienteFaker.RuleFor(c => c.Nome, f => f.Name.FirstName());
 
             var clientes = new Faker<Cliente>("pt_BR")
                 .CustomInstantiator(f => new Cliente(
@@ -48,7 +48,7 @@ namespace Features.Tests
                     ativo,
                     DateTime.Now))
                 .RuleFor(c => c.Email, (f, c) =>
-                    f.Internet.Email(c.Nome.ToLower(), c.Sobrenome.ToLower()));
+                      f.Internet.Email(c.Nome.ToLower(), c.Sobrenome.ToLower()));
 
             return clientes.Generate(quantidade);
         }
@@ -70,7 +70,16 @@ namespace Features.Tests
             return cliente;
         }
 
+        public ClienteService ObterClienteService()
+        {
+            Mocker = new AutoMocker();
+            ClienteService = Mocker.CreateInstance<ClienteService>();
+
+            return ClienteService;
+        }
+
         public void Dispose()
-        { }
+        {
+        }
     }
 }

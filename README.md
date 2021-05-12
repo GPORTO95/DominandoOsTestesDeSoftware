@@ -13,4 +13,5 @@ Vários exemplos de testes
 - [XUNIT](https://xunit.net/)
 - [BOGUS](https://github.com/bchavez/Bogus)
 - [MOQ](https://github.com/Moq/moq4/wiki/Quickstart)
+- [AUTOMOQ](https://github.com/moq/Moq.AutoMocker)
 - [SELENIUM](https://www.selenium.dev/)
