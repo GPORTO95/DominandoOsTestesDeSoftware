@@ -1,0 +1,53 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="Features.Tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="Features.Tests" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="ClienteBogusTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Features.Tests.ClienteBogusTests.Cliente_NovoCliente_DeveEstarInvalido" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Novo Cliente Inválido" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Features.Tests.ClienteBogusTests.Cliente_NovoCliente_DeveEstarValido" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Novo Cliente Válido" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+                <Rule Match="All">
+                  <Property Name="Class" Value="ClienteFluentAssertionsTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Features.Tests.ClienteFluentAssertionsTests.Cliente_NovoCliente_DeveEstarInvalido" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Novo Cliente Inválido" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Features.Tests.ClienteFluentAssertionsTests.Cliente_NovoCliente_DeveEstarValido" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Novo Cliente Válido" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>

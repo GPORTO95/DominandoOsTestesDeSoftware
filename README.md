@@ -15,4 +15,5 @@ Vários exemplos de testes
 - [MOQ](https://github.com/Moq/moq4/wiki/Quickstart)
 - [AUTOMOQ](https://github.com/moq/Moq.AutoMocker)
 - [FLUENTASSERTIONS](https://fluentassertions.com/)
+- [TESTE-VIA-LINHA-DE-COMANDO](https://docs.microsoft.com/pt-br/dotnet/core/tools/dotnet-vstest)
 - [SELENIUM](https://www.selenium.dev/)
