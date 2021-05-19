@@ -14,9 +14,9 @@ namespace NerdStore.Vendas.Domain
         {
             _pedidoItems = new List<PedidoItem>();
         }
-        public Guid ClienteId { get; private set; }
 
         private readonly List<PedidoItem> _pedidoItems;
+        public Guid ClienteId { get; private set; }
         public decimal ValorTotal { get; private set; }
         public PedidoStatus PedidoStatus { get; private set; }
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
@@ -24,6 +24,28 @@ namespace NerdStore.Vendas.Domain
         private void CalcularValorPedido() =>
             ValorTotal = PedidoItems.Sum(i => i.CalcularValor());
 
+        private bool PedidoItemExistente(PedidoItem item) =>
+            _pedidoItems.Any(p => p.ProdutoId == item.ProdutoId);
+
+        private void ValidarPedidoInexistente(PedidoItem item)
+        {
+            if (!PedidoItemExistente(item)) 
+                throw new DomainException($"O item {item.ProdutoNome} não existe no pedido");
+        }
+
+        private void ValidarQuantidadeItemPermitida(PedidoItem item)
+        {
+            var quantidadeItens = item.Quantidade;
+
+            if (PedidoItemExistente(item))
+            {
+                var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
+                quantidadeItens += itemExistente.Quantidade;
+            }
+
+            if (quantidadeItens > MAX_UNIDADES_ITEM)
+                throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto");
+        }
         public void TornarRascunho() =>
             PedidoStatus = PedidoStatus.Rascunho;
 
@@ -44,21 +66,17 @@ namespace NerdStore.Vendas.Domain
             CalcularValorPedido();
         }
 
-        private bool PedidoItemExistente(PedidoItem item) =>
-            _pedidoItems.Any(p => p.ProdutoId == item.ProdutoId);
-
-        private void ValidarQuantidadeItemPermitida(PedidoItem item)
+        public void AtualizarItem(PedidoItem pedidoItem)
         {
-            var quantidadeItens = item.Quantidade;
+            ValidarPedidoInexistente(pedidoItem);
+            ValidarQuantidadeItemPermitida(pedidoItem);
 
-            if (PedidoItemExistente(item))
-            {
-                var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
-                quantidadeItens += itemExistente.Quantidade;
-            }
+            var itemExistente = PedidoItems.FirstOrDefault(p => p.ProdutoId == pedidoItem.ProdutoId);
 
-            if (quantidadeItens > MAX_UNIDADES_ITEM)
-                throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto");
+            _pedidoItems.Remove(itemExistente);
+            _pedidoItems.Add(pedidoItem);
+
+            CalcularValorPedido();
         }
 
         public static class PedidoFactory
