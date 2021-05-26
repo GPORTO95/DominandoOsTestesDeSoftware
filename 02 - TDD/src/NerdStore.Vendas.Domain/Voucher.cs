@@ -1,10 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NerdStore.Vendas.Domain
 {
@@ -35,12 +31,6 @@ namespace NerdStore.Vendas.Domain
         {
             return new VoucherAplicavelValidation().Validate(this);
         }
-    }
-
-    public enum TipoDescontoVoucher
-    {
-        Porcentagem,
-        Valor
     }
 
     public class VoucherAplicavelValidation : AbstractValidator<Voucher>

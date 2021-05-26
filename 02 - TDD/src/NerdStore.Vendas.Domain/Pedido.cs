@@ -43,24 +43,34 @@ namespace NerdStore.Vendas.Domain
             if (!VoucherUtilizado) return;
 
             decimal desconto = 0;
+            var valor = ValorTotal;
 
             if (Voucher.TipoDescontoVoucher == TipoDescontoVoucher.Valor)
             {
                 if (Voucher.ValorDesconto.HasValue)
+                {
                     desconto = Voucher.ValorDesconto.Value;
+                    valor -= desconto;
+                }
             }
             else
             {
                 if (Voucher.PercentualDesconto.HasValue)
+                {
                     desconto = (ValorTotal * Voucher.PercentualDesconto.Value) / 100;
+                    valor -= desconto;
+                }
             }
 
-            ValorTotal -= desconto;
+            ValorTotal = valor < 0 ? 0 : valor;
             Desconto = desconto;
         }
 
-        private void CalcularValorPedido() =>
+        private void CalcularValorPedido()
+        {
             ValorTotal = PedidoItems.Sum(i => i.CalcularValor());
+            CalcularValorTotalDesconto();
+        }
 
         private bool PedidoItemExistente(PedidoItem item) =>
             _pedidoItems.Any(p => p.ProdutoId == item.ProdutoId);
