@@ -11,8 +11,8 @@ namespace NerdStore.Vendas.Domain.Tests
         public void Voucher_ValidarVoucherTipoValor_DeveEstarValido()
         {
             // Arrange
-            var voucher = new Voucher("PROMO-15-REAIS", null, 15, TipoDescontoVoucher.Valor,
-                            1, DateTime.Now.AddDays(15), true, false);
+            var voucher = new Voucher("PROMO-15-REAIS", null, 15, 1,
+                            TipoDescontoVoucher.Valor, DateTime.Now.AddDays(15), true, false);
             // Act
             var result = voucher.ValidarSeAplicavel();
 
@@ -25,8 +25,8 @@ namespace NerdStore.Vendas.Domain.Tests
         public void Voucher_ValidarVoucherTipoValor_DeveEstarInvalido()
         {
             // Arrange
-            var voucher = new Voucher("", null, null, TipoDescontoVoucher.Valor,
-                            0, DateTime.Now.AddDays(-1), false, true);
+            var voucher = new Voucher("", null, null,
+                            0, TipoDescontoVoucher.Valor, DateTime.Now.AddDays(-1), false, true);
             // Act
             var result = voucher.ValidarSeAplicavel();
 
@@ -45,8 +45,8 @@ namespace NerdStore.Vendas.Domain.Tests
         [Trait("Categoria", "Vendas - Voucher")]
         public void Voucher_ValidarVoucherPorcentagem_DeveEstarValido()
         {
-            var voucher = new Voucher("PROMO-15-OFF", 15, null, TipoDescontoVoucher.Porcentagem, 
-                1, DateTime.Now.AddDays(15), true, false);
+            var voucher = new Voucher("PROMO-15-OFF", 15, null,
+                1, TipoDescontoVoucher.Porcentagem, DateTime.Now.AddDays(15), true, false);
 
             // Act
             var result = voucher.ValidarSeAplicavel();
@@ -59,8 +59,8 @@ namespace NerdStore.Vendas.Domain.Tests
         [Trait("Categoria", "Vendas - Voucher")]
         public void Voucher_ValidarVoucherPorcentagem_DeveEstarInvalido()
         {
-            var voucher = new Voucher("", null, null, TipoDescontoVoucher.Porcentagem,
-                0, DateTime.Now.AddDays(-1), false, true);
+            var voucher = new Voucher("", null, null,
+                0, TipoDescontoVoucher.Porcentagem, DateTime.Now.AddDays(-1), false, true);
 
             // Act
             var result = voucher.ValidarSeAplicavel();

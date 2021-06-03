@@ -1,6 +1,5 @@
-﻿using MediatR;
+﻿using System;
 using NerdStore.Core.Messages;
-using System;
 
 namespace NerdStore.Vendas.Application.Events
 {

@@ -179,8 +179,8 @@ namespace NerdStore.Vendas.Domain.Tests
         {
             // Arrange
             var pedido = Pedido.PedidoFactory.NovoPedidoRascunho(Guid.NewGuid());
-            var voucher = new Voucher("PROMO-15-REAIS", null, 15, TipoDescontoVoucher.Valor,
-                1, DateTime.Now.AddDays(15), true, false);
+            var voucher = new Voucher("PROMO-15-REAIS", null, 15, 1, 
+                TipoDescontoVoucher.Valor, DateTime.Now.AddDays(15), true, false);
 
             // Act
             var result = pedido.AplicarVoucher(voucher);
@@ -195,8 +195,8 @@ namespace NerdStore.Vendas.Domain.Tests
         {
             // Arrange
             var pedido = Pedido.PedidoFactory.NovoPedidoRascunho(Guid.NewGuid());
-            var voucher = new Voucher("PROMO-15-REAIS", null, 15, TipoDescontoVoucher.Valor,
-                1, DateTime.Now.AddDays(-1), true, true);
+            var voucher = new Voucher("PROMO-15-REAIS", null, 15, 1,
+                TipoDescontoVoucher.Valor, DateTime.Now.AddDays(-1), true, true);
 
             // Act
             var result = pedido.AplicarVoucher(voucher);
@@ -217,8 +217,8 @@ namespace NerdStore.Vendas.Domain.Tests
             pedido.AdicionarItem(pedidoItem1);
             pedido.AdicionarItem(pedidoItem2);
 
-            var voucher = new Voucher("PROMO-15-REAIS", null, 15, TipoDescontoVoucher.Valor,
-                1, DateTime.Now.AddDays(15), true, false);
+            var voucher = new Voucher("PROMO-15-REAIS", null, 15, 1,
+                TipoDescontoVoucher.Valor, DateTime.Now.AddDays(15), true, false);
 
             var valorComDesconto = pedido.ValorTotal - voucher.ValorDesconto;
 
@@ -242,7 +242,7 @@ namespace NerdStore.Vendas.Domain.Tests
             pedido.AdicionarItem(pedidoItem2);
 
             var voucher = new Voucher("PROMO-15-OFF", 15, null,
-                TipoDescontoVoucher.Porcentagem, 1, DateTime.Now.AddDays(10), true, false);
+                1, TipoDescontoVoucher.Porcentagem,  DateTime.Now.AddDays(10), true, false);
 
             var valorDesconto = (pedido.ValorTotal * voucher.PercentualDesconto) / 100;
             var valorTotalComDesconto = pedido.ValorTotal - valorDesconto;
@@ -264,8 +264,8 @@ namespace NerdStore.Vendas.Domain.Tests
             var pedidoItem1 = new PedidoItem(Guid.NewGuid(), "Produto Xpto", 2, 100);
             pedido.AdicionarItem(pedidoItem1);
 
-            var voucher = new Voucher("PROMO-15-OFF", null, 300, TipoDescontoVoucher.Valor,
-                1, DateTime.Now.AddDays(10), true, false);
+            var voucher = new Voucher("PROMO-15-OFF", null, 300, 1,
+                TipoDescontoVoucher.Valor, DateTime.Now.AddDays(10), true, false);
 
             // Act
             pedido.AplicarVoucher(voucher);
@@ -283,8 +283,8 @@ namespace NerdStore.Vendas.Domain.Tests
             var pedidoItem1 = new PedidoItem(Guid.NewGuid(), "Produto Xpto", 2, 100);
             pedido.AdicionarItem(pedidoItem1);
 
-            var voucher = new Voucher("PROMO-15-OFF", null, 50, TipoDescontoVoucher.Valor,
-                1, DateTime.Now.AddDays(10), true, false);
+            var voucher = new Voucher("PROMO-15-OFF", null, 50,1,
+                TipoDescontoVoucher.Valor, DateTime.Now.AddDays(10), true, false);
             pedido.AplicarVoucher(voucher);
 
             var pedidoItem2 = new PedidoItem(Guid.NewGuid(), "Produto Teste", 4, 25);
