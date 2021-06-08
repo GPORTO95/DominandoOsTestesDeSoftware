@@ -11,7 +11,7 @@ namespace NerdStore.WebApp.Tests.Config
 
     [CollectionDefinition(nameof(IntegrationApiTestsFixtureCollection))]
     public class IntegrationApiTestsFixtureCollection : ICollectionFixture<IntegrationTestsFixture<StartupApiTests>> { }
-    
+
     public class IntegrationTestsFixture<TStartup> : IDisposable where TStartup : class
     {
         public readonly LojaAppFactory<TStartup> Factory;
@@ -21,7 +21,6 @@ namespace NerdStore.WebApp.Tests.Config
         {
             var clientOptions = new WebApplicationFactoryClientOptions
             {
-                
             };
 
             Factory = new LojaAppFactory<TStartup>();
@@ -29,8 +28,8 @@ namespace NerdStore.WebApp.Tests.Config
         }
         public void Dispose()
         {
-            Client?.Dispose();
-            Factory?.Dispose();
+            Client.Dispose();
+            Factory.Dispose();
         }
     }
 }
