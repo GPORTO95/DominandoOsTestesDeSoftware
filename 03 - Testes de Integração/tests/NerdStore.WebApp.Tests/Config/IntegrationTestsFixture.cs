@@ -38,7 +38,7 @@ namespace NerdStore.WebApp.Tests.Config
         {
             var faker = new Faker("pt_BR");
             UsuarioEmail = faker.Internet.Email().ToLower();
-            UsuarioSenha = faker.Internet.Password(8, false, "", "@1Ab_");
+            UsuarioSenha = faker.Internet.Password(8, false, "", "@1Ab_123");
         }
 
         public string ObterAntiForgeryToken(string htmlBody)
