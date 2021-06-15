@@ -1,32 +1,35 @@
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
 using NerdStore.Catalogo.Application.AutoMapper;
 using NerdStore.Catalogo.Data;
 using NerdStore.Vendas.Data;
 using NerdStore.WebApp.MVC.Data;
+using NerdStore.WebApp.MVC.Models;
 using NerdStore.WebApp.MVC.Setup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace NerdStore.WebApp.MVC
 {
     public class StartupApiTests
     {
-        public StartupApiTests(IConfiguration configuration)
+        public StartupApiTests(IWebHostEnvironment hostEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -52,57 +55,38 @@ namespace NerdStore.WebApp.MVC
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            //services
+            //    .AddDefaultIdentity<IdentityUser>()
+            //    .AddRoles<IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
 
-            services.AddSwaggerGen(c =>
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddAuthentication(x =>
             {
-                var security = new Dictionary<string, IEnumerable<string>>
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    {"Bearer", new string[] { }}
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = appSettings.ValidoEm,
+                    ValidIssuer = appSettings.Emissor
                 };
-
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Scheme = "bearer",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT"
-                });
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                    {
-                        {
-                            new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-                            },
-                            new List<string>()
-                        }
-                    });
-
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "desenvolvedor.io API",
-                    Description = "desenvolvedor.io  API",
-                    TermsOfService = new Uri("Nenhum"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "desenvolvedor.io",
-                        Email = "email@desenvolvedor.io",
-                        Url = new Uri("http://desenvolvedor.io")
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "MIT",
-                        Url = new Uri("http://desenvolvedor.io/licensa")
-                    }
-                });
             });
+
+            services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
             services.AddMediatR(typeof(Startup));
@@ -137,12 +121,6 @@ namespace NerdStore.WebApp.MVC
                     name: "default",
                     pattern: "{controller=Vitrine}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-            });
-            
-            app.UseSwagger();
-            app.UseSwaggerUI(s =>
-            {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "desenvolvedor.io API v1.0");
             });
         }
     }
