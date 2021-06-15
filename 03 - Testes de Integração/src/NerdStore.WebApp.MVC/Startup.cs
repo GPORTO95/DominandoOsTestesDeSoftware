@@ -90,7 +90,7 @@ namespace NerdStore.WebApp.MVC
                     Version = "v1",
                     Title = "desenvolvedor.io API",
                     Description = "desenvolvedor.io  API",
-                    TermsOfService = new Uri("Nenhum"),
+                    TermsOfService = new Uri("http://desenvolvedor.io"),
                     Contact = new OpenApiContact
                     {
                         Name = "desenvolvedor.io",
