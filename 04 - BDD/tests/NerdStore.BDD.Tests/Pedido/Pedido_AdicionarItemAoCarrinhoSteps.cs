@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium.Chrome;
+using System;
 using TechTalk.SpecFlow;
 
 namespace NerdStore.BDD.Tests.Pedido
@@ -10,6 +11,8 @@ namespace NerdStore.BDD.Tests.Pedido
         public void DadoQueUmProdutoEstejaNaVitrine()
         {
             // Arrange
+            var browser = new ChromeDriver("D:\\WebDriver");
+            browser.Navigate().GoToUrl("https://desenvolvedor.io");
 
             // Act 
 
