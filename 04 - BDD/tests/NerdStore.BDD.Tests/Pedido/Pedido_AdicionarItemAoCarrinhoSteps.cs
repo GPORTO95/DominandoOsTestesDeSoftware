@@ -1,19 +1,28 @@
-﻿using OpenQA.Selenium.Chrome;
-using System;
+﻿using NerdStore.BDD.Tests.Config;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace NerdStore.BDD.Tests.Pedido
 {
     [Binding]
+    [CollectionDefinition(nameof(AutomacaoWebFixtureCollection))]
     public class Pedido_AdicionarItemAoCarrinhoSteps
     {
+        private readonly AutomacaoWebTestsFixture _testFixture;
+
+        public Pedido_AdicionarItemAoCarrinhoSteps(AutomacaoWebTestsFixture testFixture)
+        {
+            _testFixture = testFixture;
+        }
+
         [Given(@"Que um produto esteja na vitrine")]
         public void DadoQueUmProdutoEstejaNaVitrine()
         {
             // Arrange
-            var browser = new ChromeDriver("D:\\WebDriver");
-            browser.Navigate().GoToUrl("https://desenvolvedor.io");
-
+            var browser = new SeleniumHelper(Browser.Chrome, new ConfigurationHelper(), false);
+            browser.IrParaUrl("https://desenvolvedor.io");
+            browser.ClicarLinkPorTexto("Entrar");
+            browser.PreencherTextBoxPorId("Email", "contato@teste.com");
             // Act 
 
             // Assert
