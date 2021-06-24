@@ -18,7 +18,7 @@ namespace NerdStore.BDD.Tests.Config
             Configuration = configuration;
             WebDriver = WebDriverFactory.CreateWebDriver(browser, Configuration.WebDrivers, headless);
             WebDriver.Manage().Window.Maximize();
-            Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(30));
+            Wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(60));
         }
         public string ObterUrl()
         {
