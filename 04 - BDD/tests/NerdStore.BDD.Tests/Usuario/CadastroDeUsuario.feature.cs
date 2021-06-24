@@ -40,8 +40,8 @@ namespace NerdStore.BDD.Tests.Usuario
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-BR"), "Usuario", "Usuário - Cadastro", "\tComo um visitante da Loja\r\n\tEu desejo me cadastrar como usuário\r\n\tPara que eu po" +
-                    "ssa realizar compras na Loja", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-BR"), "Usuario", "Usuário - Cadastro", "\tComo um visitante da loja\r\n\tEu desejo me cadastrar como usuário\r\n\tPara que eu po" +
+                    "ssa realizar compras na loja", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -113,24 +113,24 @@ this.ScenarioInitialize(scenarioInfo);
 testRunner.Given("Que o visitante está acessando o site da loja", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 8
-testRunner.When("ele clica em registrar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+testRunner.When("Ele clicar em registrar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Dados"});
                 table1.AddRow(new string[] {
-                            "Email"});
+                            "E-mail"});
                 table1.AddRow(new string[] {
                             "Senha"});
                 table1.AddRow(new string[] {
-                            "Confirmacao da Senha"});
+                            "Confirmação da Senha"});
 #line 9
-testRunner.And("preencher os dados do formulario", ((string)(null)), table1, "E ");
+testRunner.And("Preencher os dados do formulario", ((string)(null)), table1, "E ");
 #line hidden
 #line 14
 testRunner.And("Clicar no botão registrar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 15
-testRunner.Then("Ele será redirecionado para a vitrine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+testRunner.Then("Ele será redirecionado para a vitrine", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 16
 testRunner.And("Uma saudação com seu e-mail será exibida no menu superior", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");

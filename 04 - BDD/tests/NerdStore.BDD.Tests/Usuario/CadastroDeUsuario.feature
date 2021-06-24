@@ -1,18 +1,18 @@
 ﻿Funcionalidade: Usuário - Cadastro
-	Como um visitante da Loja
+	Como um visitante da loja
 	Eu desejo me cadastrar como usuário
-	Para que eu possa realizar compras na Loja
+	Para que eu possa realizar compras na loja
 
 Cenário: Cadastro de usuário com sucesso
 Dado Que o visitante está acessando o site da loja
-Quando ele clica em registrar
-E preencher os dados do formulario
-		| Dados				   |
-		| Email				   |
-		| Senha				   |
-		| Confirmacao da Senha |
+Quando Ele clicar em registrar
+E Preencher os dados do formulario
+		| Dados                |
+		| E-mail               |
+		| Senha                |
+		| Confirmação da Senha |
 E Clicar no botão registrar
-Entao Ele será redirecionado para a vitrine
+Então Ele será redirecionado para a vitrine
 E Uma saudação com seu e-mail será exibida no menu superior
 
 Cenário: Cadastro com senha sem maiusculas
