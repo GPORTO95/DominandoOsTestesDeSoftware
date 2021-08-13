@@ -10,8 +10,8 @@ using NerdStore.WebApp.MVC.Data;
 namespace NerdStore.WebApp.MVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210608003912_Identy")]
-    partial class Identy
+    [Migration("20210813004859_Application")]
+    partial class Application
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

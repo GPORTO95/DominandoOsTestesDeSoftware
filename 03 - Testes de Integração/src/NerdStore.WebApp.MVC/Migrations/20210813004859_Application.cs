@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NerdStore.WebApp.MVC.Migrations
 {
-    public partial class Identy : Migration
+    public partial class Application : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
