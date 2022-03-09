@@ -8,25 +8,19 @@ Aqui criei varios projetos com exemplos de Testes.
 4. BDD - BEHAVIOR DRIVEN DEVELOPMENT
 5. TESTE AUTOMATIZADO
 
-6. <summary> `**TESTE DE CARGA**` </summary>
-- [Objetivos]
+6. **TESTE DE CARGA**
+- **Objetivos**
     - Desempenho 
         - Valida um cenário real com varios acessos simultaneos.
     - Carga 
         - Valida encontrar o limite de capacidade.
     - Stress 
         - Valida encontrar o limite de requisição.
-- [Ferramentas]
+- **Ferramentas**
     - [APACHE JMeter](https://jmeter.apache.org/)
     - [BlazeMeter](https://www.blazemeter.com/) - **PAGO**
     - [Artillery.IO](https://www.artillery.io/)
     - [AutoCannon](https://github.com/mcollina/autocannon/)
-
-<details>
-  <summary><b>TESTE DE CARGA</b></summary>
-    * <summary>Desempenho</summary>
-        * <summary>Valida um cenário real com varios acessos simultaneos.</summary>
-</details>
 
 ## :hammer_and_wrench: Ferramentas
 - [XUNIT](https://xunit.net/)
