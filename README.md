@@ -8,8 +8,7 @@ Aqui criei varios projetos com exemplos de Testes.
 4. BDD - BEHAVIOR DRIVEN DEVELOPMENT
 5. TESTE AUTOMATIZADO
 
-```
-6. TESTE DE CARGA
+6. <summary> `**TESTE DE CARGA**` </summary>
 - [Objetivos]
     - Desempenho 
         - Valida um cenário real com varios acessos simultaneos.
@@ -22,7 +21,7 @@ Aqui criei varios projetos com exemplos de Testes.
     - [BlazeMeter](https://www.blazemeter.com/) - **PAGO**
     - [Artillery.IO](https://www.artillery.io/)
     - [AutoCannon](https://github.com/mcollina/autocannon/)
-```
+
 
 ## :hammer_and_wrench: Ferramentas
 - [XUNIT](https://xunit.net/)
