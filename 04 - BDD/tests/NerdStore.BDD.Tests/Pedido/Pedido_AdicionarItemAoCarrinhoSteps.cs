@@ -59,6 +59,19 @@ namespace NerdStore.BDD.Tests.Pedido
             Assert.True(_pedidoTela.ObterQuantidadeNoEstoque() > 0);
         }
 
+        [Given(@"Não tenha nenhum produto adicionado ao carrinho")]
+        public void DadoNaoTenhaNenhumProdutoAdicionadoAoCarrinho()
+        {
+            // Act
+            _pedidoTela.NavegarParaCarrinhoDeCompras();
+            _pedidoTela.ZerarCarrinhoDeCompras();
+
+            // Assert
+            Assert.Equal(0, _pedidoTela.ObterValorTotalCarrinho());
+
+            _pedidoTela.NavegarParaUrl(_urlProduto);
+        }
+
         [When(@"O usuário adicionar uma unidade ao carrinho")]
         public void QuandoOUsuarioAdicionarUmaUnidadeAoCarrinho()
         {
@@ -94,32 +107,6 @@ namespace NerdStore.BDD.Tests.Pedido
             _pedidoTela.ClicarEmComprarAgora();
         }
 
-        [Given(@"O mesmo produto já tenha sido adicionado ao carrinho anteriormente")]
-        public void DadoOMesmoProdutoJaTenhaSidoAdicionadoAoCarrinhoAnteriormente()
-        {
-            // Act 
-            _pedidoTela.NavegarParaCarrinhoDeCompras();
-            //_pedidoTela.GarantirQueOPrimeiroItemDaVitrineEstejaAdicionado();
-            //var produtoId = _pedidoTela.ObterIdPrimeiroProdutoCarrinho();
-
-            //// Assert
-            //Assert.Contains(_urlProduto, produtoId);
-            //Assert.True(_pedidoTela.ValidarSeEstaNoCarrinhoDeCompras());
-            //Assert.True(_pedidoTela.ObterQuantidadeDeItensPrimeiroProdutoCarrinho() >= 1);
-
-            //_pedidoTela.VoltarNavegacao();
-        }
-
-        [When(@"O usuário adicionar a quantidade máxima permitida ao carrinho")]
-        public void QuandoOUsuarioAdicionarAQuantidadeMaximaPermitidaAoCarrinho()
-        {
-            // Arrange
-
-            // Act 
-
-            // Assert
-        }
-
         [Then(@"Receberá uma mensagem de erro mencionando que foi ultrapassada a quantidade limite")]
         public void EntaoReceberaUmaMensagemDeErroMencionandoQueFoiUltrapassadaAQuantidadeLimite()
         {
@@ -130,24 +117,49 @@ namespace NerdStore.BDD.Tests.Pedido
             Assert.Contains($"A quantidade máxima de um item é {Vendas.Domain.Pedido.MAX_UNIDADES_ITEM}", mensagem);
         }
 
+        [Given(@"O mesmo produto já tenha sido adicionado ao carrinho anteriormente")]
+        public void DadoOMesmoProdutoJaTenhaSidoAdicionadoAoCarrinhoAnteriormente()
+        {
+            // Act 
+            _pedidoTela.NavegarParaCarrinhoDeCompras();
+            _pedidoTela.ZerarCarrinhoDeCompras();
+            _pedidoTela.AcessarVitrineDeProdutos();
+            _pedidoTela.ObterDetalhesDoProduto();
+            _pedidoTela.ClicarEmComprarAgora();
+
+            // Assert
+            Assert.True(_pedidoTela.ValidarSeEstaNoCarrinhoDeCompras());
+
+            _pedidoTela.VoltarNavegacao();
+        }
+
         [Then(@"A quantidade de itens daquele produto terá sido acrescida em uma unidade a mais")]
         public void EntaoAQuantidadeDeItensDaqueleProdutoTeraSidoAcrescidaEmUmaUnidadeAMais()
         {
-            // Arrange
-
-            // Act 
-
             // Assert
+            Assert.True(_pedidoTela.ObterQuantidadeDeItensPrimeiroProdutoCarrinho() == 2);
         }
 
         [Then(@"O valor total do pedido será a multiplicação da quantidade de itens pelo valor unitario")]
         public void EntaoOValorTotalDoPedidoSeraAMultiplicacaoDaQuantidadeDeItensPeloValorUnitario()
         {
             // Arrange
-
-            // Act 
+            var valorUnitario = _pedidoTela.ObterValorUnitarioProdutoCarrinho();
+            var valorCarrinho = _pedidoTela.ObterValorTotalCarrinho();
+            var quantidadeUnidades = _pedidoTela.ObterQuantidadeDeItensPrimeiroProdutoCarrinho();
 
             // Assert
+            Assert.Equal(valorUnitario * quantidadeUnidades, valorCarrinho);
+        }
+
+        [When(@"O usuário adicionar a quantidade máxima permitida ao carrinho")]
+        public void QuandoOUsuarioAdicionarAQuantidadeMaximaPermitidaAoCarrinho()
+        {
+            // Arrange
+            _pedidoTela.ClicarAdicionarQuantidadeItens(Vendas.Domain.Pedido.MAX_UNIDADES_ITEM);
+
+            // Act
+            _pedidoTela.ClicarEmComprarAgora();
         }
     }
 }

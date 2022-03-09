@@ -7,6 +7,7 @@ Cenário: Adicionar item com sucesso a um novo pedido
 Dado O usuario esteja logado
 E Que um produto esteja na vitrine
 E Esteja disponivel no estoque
+E Não tenha nenhum produto adicionado ao carrinho
 Quando O usuário adicionar uma unidade ao carrinho
 Então O usuário será redirecionado ao resumo da compra
 E O valor total do pedido será exatamente o valor do item adicionado
@@ -34,5 +35,4 @@ E Que um produto esteja na vitrine
 E Esteja disponivel no estoque
 E O mesmo produto já tenha sido adicionado ao carrinho anteriormente
 Quando O usuário adicionar a quantidade máxima permitida ao carrinho
-Então O usuário será redirecionado ao resumo da compra
-E Receberá uma mensagem de erro mencionando que foi ultrapassada a quantidade limite
+Então Receberá uma mensagem de erro mencionando que foi ultrapassada a quantidade limite

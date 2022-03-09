@@ -45,12 +45,12 @@ namespace NerdStore.BDD.Tests.Pedido
         public decimal ObterValorUnitarioProdutoCarrinho()
         {
             return Convert.ToDecimal(Helper.ObterTextoElementoPorId("valorUnitario")
-                .Replace('R', ' ').Replace('$',' ').Trim());
+                .Replace('R', ' ').Replace('$',' ').Replace(",", string.Empty).Trim());
         }
         public decimal ObterValorTotalCarrinho()
         {
             return Convert.ToDecimal(Helper.ObterTextoElementoPorId("valorTotal")
-                .Replace('R', ' ').Replace('$', ' ').Trim());
+                .Replace('R', ' ').Replace('$', ' ').Replace(",", string.Empty).Trim());
         }
 
         public void ClicarAdicionarQuantidadeItens(int quantidade)
@@ -72,6 +72,40 @@ namespace NerdStore.BDD.Tests.Pedido
         public void NavegarParaCarrinhoDeCompras()
         {
             Helper.ObterElementoPorXPath("/html/body/header/nav/div/div/ul/li[3]/a").Click();
+        }
+
+        public string ObterIdPrimeiroProdutoCarrinho()
+        {
+            return Helper.ObterElementoPorXPath("/html/body/div/main/div/div/div/table/tbody/tr[1]/td[1]/div/div/h4/a")
+                .GetAttribute("href");
+        }
+
+        public void GarantirQueOPrimeiroItemDaVitrineEstejaAdicionado()
+        {
+            NavegarParaCarrinhoDeCompras();
+            if (ObterValorTotalCarrinho() > 0) return;
+
+            AcessarVitrineDeProdutos();
+            ObterDetalhesDoProduto();
+            ClicarEmComprarAgora();
+        }
+
+        public int ObterQuantidadeDeItensPrimeiroProdutoCarrinho()
+        {
+            return Convert.ToInt32(Helper.ObterValorTextBoxPorId("quantidade"));
+        }
+
+        public void VoltarNavegacao(int vezes = 1)
+        {
+            Helper.VoltarNavegacao(vezes);
+        }
+
+        public void ZerarCarrinhoDeCompras()
+        {
+            while (ObterValorTotalCarrinho() > 0)
+            {
+                Helper.ClicarPorXPath("/html/body/div/main/div/div/div/table/tbody/tr[1]/td[5]/form/button");
+            }
         }
     }
 }
