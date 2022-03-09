@@ -22,6 +22,31 @@ Aqui criei varios projetos com exemplos de Testes.
     - [Artillery.IO](https://www.artillery.io/)
     - [AutoCannon](https://github.com/mcollina/autocannon/)
 
+  <details>
+  <summary><b><u>Top Level Toggle</u></b></summary>
+
+  <p>
+          Great, Top Layer summary text working fine.
+  </p>
+
+  *   <details>
+      <summary><b>Mid Toggle</b></summary>
+
+      <p>
+          Great, Middle Layer summary text working fine.
+      </p>
+
+      * <details>
+        <summary><b><i>Inner Toggle</i></b></summary>
+
+        <p>
+          Great, Inner Layer summary text working fine.
+        </p>
+
+
+      </details>
+      </details>
+  </details>
 
 ## :hammer_and_wrench: Ferramentas
 - [XUNIT](https://xunit.net/)
