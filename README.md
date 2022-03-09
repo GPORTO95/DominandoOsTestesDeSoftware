@@ -24,8 +24,8 @@ Aqui criei varios projetos com exemplos de Testes.
 
 <details>
   <summary><b>TESTE DE CARGA</b></summary>
-    * Desempenho 
-        * Valida um cenário real com varios acessos simultaneos.
+    * <summary>Desempenho</summary>
+        * <summary>Valida um cenário real com varios acessos simultaneos.</summary>
 </details>
 
 ## :hammer_and_wrench: Ferramentas
